@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Component, OnInit } from '@angular/core';
 import { WeatherService } from './weather.service';
 import { PH_CITIES } from './ph-cities';
@@ -57,3 +58,17 @@ export class AppComponent implements OnInit {
     this.savedCities = this.savedCities.filter(c => c !== city);
   }
 }
+=======
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css'
+})
+export class AppComponent {
+  title = 'ngipol_midterm_exam';
+}
+>>>>>>> b22d6bf13d80cda55ec68ce65c9b74631ada1596
