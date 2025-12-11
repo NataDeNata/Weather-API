@@ -1,0 +1,53 @@
+<main class="main">
+  <h1 class="weather-title">Weather Search</h1>
+  <div class="search-bar">
+    <input type="text" placeholder="Search city..." #searchInput (keyup.enter)="onSearch(searchInput.value)" class="search-input" />
+    <button (click)="onSearch(searchInput.value)" class="search-btn">Search</button>
+    <button (click)="onSaveCity(searchInput.value)" class="save-btn">Save City</button>
+    <a href="#" (click)="showSavedCities()" class="saved-link">Saved Cities</a>
+  </div>
+  @if (loading) {
+    <div class="loading">Loading weather data...</div>
+  }
+  @if (!loading && searchedWeather) {
+    <div style="display:flex; justify-content:center; margin-bottom:32px;">
+      <table class="weather-table">
+        <thead>
+          <tr>
+            <th>City</th>
+            <th>Temperature (°C)</th>
+            <th>Condition</th>
+            <th>Humidity (%)</th>
+            <th>Wind (m/s)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ searchedWeather.city }}</td>
+            <td>{{ searchedWeather.data?.main?.temp ?? 'N/A' }}</td>
+            <td>{{ searchedWeather.data?.weather?.[0]?.description ?? 'N/A' }}</td>
+            <td>{{ searchedWeather.data?.main?.humidity ?? 'N/A' }}</td>
+            <td>{{ searchedWeather.data?.wind?.speed ?? 'N/A' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (showingSavedCities) {
+    <div class="saved-cities">
+      <h2 class="saved-cities-title">Saved Cities</h2>
+      <ul class="saved-cities-list">
+        @for (city of savedCities; track city) {
+          <li>
+            <span class="saved-city-name">{{ city }}</span>
+            <span>
+              <button (click)="onSearch(city)" class="show-btn">Show Weather</button>
+              <button (click)="onRemoveCity(city)" class="remove-btn">Remove</button>
+            </span>
+          </li>
+        }
+      </ul>
+      <button (click)="hideSavedCities()" class="close-btn">Close</button>
+    </div>
+  }
+</main>
